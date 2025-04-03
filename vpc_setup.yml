@@ -116,7 +116,7 @@
         vpc_id:  "{{vpcout.vpc.id}}"
         regions: "{{region}}"
         state: "{{state}}"
-        reosurce_tags:
+        resource_tags:
           Name: 'vprofile_IGW'
         register: igw_out
     - debug:
