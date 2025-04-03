@@ -42,6 +42,8 @@
         state: "{{state}}"
         cidr: "{{PubSub2Cidr}}"
         map_public: yes
+        tags:
+          Name: pubsub2_zone2
         resource_tags:
           name: vprofile-pubsub1
       register: pubsub2_out
