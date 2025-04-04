@@ -111,22 +111,23 @@
     # - debug:
     #     var: privsub3_out
 
-    - name: Internet Fateway Setup
+    - name: Internet Gateway Setup
       ec2_vpc_igw:
         vpc_id:  "{{vpcout.vpc.id}}"
         region: "{{region}}"
         state: "{{state}}"
         resource_tags:
-          Name: 'vprofile_IGW'
+          Name: vprofile_IGW
       register: igw_out
+
     - debug:
         var: igw_out 
 
-    - name:  Internet Gateway Setup
+    - name:  Set up public subnet route table
       ec2_vpc_route_table:
         vpc_id: "{{vpcout.vpc.id}}"
         region: "{{region}}"
-        tags:
+        resource_tags:
           Name: VProfile-PubRT
         subnets:
           -  "{{pubsub1_out.subnet.id}}"
@@ -135,4 +136,4 @@
         routes:
           - dest: 0.0.0.0/0
             geteway_id: "{{igw_out.gateway_id}}"
-        register: pubRT_out
+      register: pubRT_out
