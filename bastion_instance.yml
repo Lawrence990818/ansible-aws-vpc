@@ -12,13 +12,13 @@
     
     - name: Create vprofile ec2 key
       ec2_key:
-        namr: vprofile-key
-        region: "{{region}}"
+        name: vprofile-key  # Corrected 'namr' to 'name'
+        region: "{{ region }}"
       register: key_out
 
     - name: Save private key into file bastion-key.pem
       copy:
-        content: "{{key_out.key.private_key}}"
+        content: "{{ key_out.key.private_key }}"
         dest: "./bastion-key.pem"
         mode: 0600
       when: key_out.changed
@@ -26,28 +26,28 @@
     - name: Create Sec Grp for bastion host
       ec2_group:
         name: Bastion-host
-        description: All port 22 from everywhere and lla port withing sg
-        region: "{{region}}"
-        vpc_id: "{{cpcid}}"
+        description: All port 22 from everywhere and all ports within sg
+        region: "{{ region }}"
+        vpc_id: "{{ cpcid }}"
         rules:
-          -  proto: tcp
-             from_port: 22
-             to_port: 22
-             cidr_ip: "{{MYIP}}"
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: "{{ MYIP }}"
       register: BastionSG_out
     
-    - name: Create BVastion Host
+    - name: Create Bastion Host
       ec2:
         key_name: vprofile-key
-        region: "{{region}}"
-        instance_tyoe: t2.mcro
-        image: "{{bastion_ami}}"
+        region: "{{ region }}"
+        instance_type: t2.micro  # Corrected 'instance_tyoe' to 'instance_type'
+        image: "{{ bastion_ami }}"
         wait: yes
         wait_timeout: 300
         instance_tags:
           Name: "Bastion_Host"
           Project: Vprofile
           Owner: DevOps Team
-        group_id: "{{BastionSG_out.group_id}}"
-        vpc_subnet_id: "{{pubsub1id}}"
+        group_id: "{{ BastionSG_out.group_id }}"
+        vpc_subnet_id: "{{ pubsub1id }}"
       register: bastionHost_out
