@@ -28,7 +28,7 @@
         name: Bastion-host
         description: All port 22 from everywhere and all ports within sg
         region: "{{ region }}"
-        vpc_id: "{{ cpcid }}"
+        vpc_id: "{{ vpcid }}"
         rules:
           - proto: tcp
             from_port: 22
