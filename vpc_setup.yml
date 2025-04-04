@@ -149,7 +149,7 @@
     - name: Set up Private subnet route table
       ec2_vpc_route_table:
         vpc_id: "{{ vpcout.vpc.id}}"
-        region: "{{region}}"
+        region: "{{ region }}"
         tags:
           Name: Vprofile_PrivRT
         subnets:
@@ -159,4 +159,4 @@
         routes:
           - dest: 0.0.0.0/0
             gateway_id: "{{NATGW_out.nat_gateway_id}}"
-        register: privRT_out
+      register: privRT_out
