@@ -16,7 +16,7 @@
         region: "{{ region }}"
         file_name: "./vprofile-key.pem" # Specify the local path to save the private key
       register: key_out
-      no_log: true  # Prevent displaying the private key in logs
+      # no_log: true  # Prevent displaying the private key in logs
 
     - name: Save private key into file bastion-key.pem
       copy:
