@@ -14,7 +14,7 @@
       ec2_key:
         name: vprofile-key
         region: "{{ region }}"
-        file_name: ./vprofile-key.pem # Specify the local path to save the private key
+        # file_name: ./vprofile-key.pem # Specify the local path to save the private key
       register: key_out
       # no_log: true  # Prevent displaying the private key in logs
 
