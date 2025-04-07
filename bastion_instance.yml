@@ -38,10 +38,10 @@
     
     - name: Create Bastion Host
       ec2_instance:
-        key_name: vprofile-key
+        key_name: "vprofile-key"
         region: "{{ region }}"
         instance_type: t2.micro
-        image_id: "{{ bastion_ami }}"  # Ensure this is a valid AMI ID string
+        image_id: ami-00a929b66ed6e0de6  # Ensure this is a valid AMI ID string
         wait: yes
         wait_timeout: 300
         instance_tags:
